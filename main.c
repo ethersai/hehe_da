@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#define HEHE_DA_INIT_CAP 1
 #include "hehe.h"
 
 typedef struct {
@@ -7,12 +9,6 @@ typedef struct {
     size_t  count;
     size_t  capacity;
 } HeheDynamicArray;
-
-// #define hehe_da_append(hda, item)   \
-//    do {                            \
-//                                    \
-//                                    \
-//    } while (0)                     \
 
 void da_print_info(HeheDynamicArray* da)
 {

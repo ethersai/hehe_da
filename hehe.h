@@ -1,8 +1,6 @@
 #ifndef HEHE_DA_H_
 #define HEHE_DA_H_
 
-#include <stdlib.h>
-
 #ifndef HEHE_DA_INIT_CAP
 #define HEHE_DA_INIT_CAP 256
 #endif /* HEHE_DA_INIT_CAP */
@@ -10,17 +8,27 @@
 #error "HEHE_DA_INIT_CAP must be positive"
 #endif
 
+// You can override these with your own implementations before including this header.
 #ifndef HEHE_DA_ASSERT
 #include <assert.h>
 #define HEHE_DA_ASSERT assert
 #endif /* HEHE_DA_ASSRT */
 
+#ifndef HEHE_DA_REALLOC
+#include <stdlib.h>
+#define HEHE_DA_REALLOC realloc
+#endif /* HEHE_DA_REALLOC */
 
-// #define hehe_da_reserve(hda) \
-//     do {                     \
-//                              \
-//     } while (0)              \
-
+// TODO
+#define hehe_da_grow(hda, needs)                        \
+     do {                                               \
+         void* tmp = NULL;                              \
+         if ((hda)->capacity == 0) {                    \
+             (hda)->capacity = HEHE_DA_INIT_CAP         \
+         }                                              \
+         while ((hda)->capacity < )                     \
+                                                        \
+     } while (0)                                        \
 
 #define hehe_da_append(hda, item)                                                      \
     do {                                                                               \
@@ -38,7 +46,13 @@
         (hda)->items[(hda)->count++] = (item);                                           \
     } while (0)                                                                        \
 
-#define hehe_da_append_many
+#define hehe_da_append_many(hda, item, amount)                   \
+    do {                                                         \
+        if ((hda)->capacity < (hda)->count + amount) {            \
+                                                                  \
+        }                                                        \
+                                                                 \
+    } while (0)                                                  \
 
 
 #ifdef HEHE_DA_IMPLEMENTATION
