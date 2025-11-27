@@ -145,6 +145,9 @@
     do {                                                                    \
         (que)->items = HEHE_DA_MALLOC(sizeof(*(que)->items) * (cap));       \
         hehe_perma_assert((que)->items != NULL);                            \
+        (que)->head = 0;                                                    \
+        (que)->tail = 0;                                                    \
+        (que)->count = 0;                                                   \
         (que)->capacity = (cap);                                            \
     } while (0)
 
@@ -177,5 +180,9 @@
             (que)->capacity = 0;                \
         }                                       \
     } while (0)
+
+#define hehe_que_is_full(que)  ((que)->count == (que)->capacity)
+#define hehe_que_is_empty(que) ((que)->count == 0)
+#define hehe_que_size(que)     ((que)->count)
 
 #endif /* HEHE_DA_H_ */
