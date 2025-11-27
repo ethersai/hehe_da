@@ -42,6 +42,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #ifndef HEHE_DA_INIT_CAP
 #define HEHE_DA_INIT_CAP 256
