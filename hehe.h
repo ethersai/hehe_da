@@ -13,6 +13,30 @@
  *   hehe_da_free(&arr);
  */
 
+/*
+ * HEHE_QUE - Circular Queue Implementation
+ * 
+ * Usage:
+ *   typedef struct {
+ *       int *items;
+ *       size_t head;
+ *       size_t tail;
+ *       size_t count;
+ *       size_t capacity;
+ *   } IntQueue;
+ *   
+ *   IntQueue que = {0};
+ *   hehe_que_mem_init(&que, 64);  // Fixed capacity of 64
+ *   
+ *   int value = 42;
+ *   hehe_que_enque(&que, value);  // Add to queue
+ *   
+ *   int result;
+ *   hehe_que_deque(&que, result); // Remove from queue
+ *   
+ *   HEHE_DA_FREE(que.items);      // Free when done
+ */
+
 #ifndef HEHE_DA_H_
 #define HEHE_DA_H_
 
@@ -25,6 +49,8 @@
 #if HEHE_DA_INIT_CAP <= 0
 #error "HEHE_DA_INIT_CAP must be positive"
 #endif
+
+#define hehe_perma_assert(exp) do { if(!(exp)) { fprintf(stderr, "[HEHE_DS] Assertion failed: %s, file %s, line %d\n", #exp, __FILE__, __LINE__); abort() ;} ;} while (0)
 
 // You can override these with your own implementations before including this header.
 #ifndef HEHE_DA_ASSERT
@@ -40,8 +66,11 @@
 #define HEHE_DA_REALLOC realloc
 #endif /* HEHE_DA_REALLOC */
 
+#ifndef HEHE_DA_MALLOC
+#define HEHE_DA_MALLOC malloc
+#endif /* HEHE_DA_MALLOC */
+
 // TODO 
-// PERMA ASSERT
 // SOME POTENTIAL OVERFLOW CHECKS FOR CAPACITY.
 
 // DYNAMIC ARRAY
@@ -57,7 +86,7 @@
          tmp = HEHE_DA_REALLOC((hda)->items, (hda)->capacity * sizeof(*(hda)->items));  \
          HEHE_DA_ASSERT(tmp && "HEHE GROW FAILED!");                            \
          (hda)->items = tmp;                                                    \
-     } while (0)                                                                \
+     } while (0)                                                                
 
 #define hehe_da_append(hda, item)                                                      \
     do {                                                                               \
@@ -65,14 +94,14 @@
             hehe_da_grow((hda), 1);                                                    \
         }                                                                              \
         (hda)->items[(hda)->count++] = (item);                                         \
-    } while (0)                                                                        \
+    } while (0)                                                                        
 
 #define hehe_da_pop(hda, pop_out)                                   \
     do {                                                            \
         if ((hda)->count > 0) {                                     \
            *pop_out = ((hda)->items[--(hda)->count]);               \
         }                                                           \
-    } while (0)                                                     \
+    } while (0)                                                     
 
 #define hehe_da_append_many(hda, item, amount)                                                 \
     do {                                                                                       \
@@ -81,7 +110,7 @@
         }                                                                                      \
         memcpy(&((hda)->items[(hda)->count]), (item), sizeof(*(hda)->items) * (amount));       \
         (hda)->count += (amount);                                                              \
-    } while (0)                                                                                \
+    } while (0)                                                                                
 
 #define hehe_da_free(hda)                                                   \
     do {                                                                    \
@@ -91,12 +120,12 @@
             (hda)->count = 0;                                               \
             (hda)->capacity = 0;                                            \
         }                                                                   \
-    } while (0)                                                             \
+    } while (0)                                                             
 
 #define hehe_da_clear(hda)  \
     do {                    \
         (hda)->count = 0;   \
-    } while (0)             \
+    } while (0)             
 
 
 #define hehe_da_reserve(hda, cap)              \
@@ -108,11 +137,44 @@
             (hda)->items = tmp;                \
             (hda)->capacity = (cap);           \
         }                                      \
-    } while (0)                                \
+    } while (0)                                
 
+// QUEUE / CIRCULAR BUFFER
+#define hehe_que_mem_init(que, cap)                                         \
+    do {                                                                    \
+        (que)->items = HEHE_DA_MALLOC(sizeof(*(que)->items) * (cap));       \
+        hehe_perma_assert((que)->items != NULL);                            \
+        (que)->capacity = (cap);                                            \
+    } while (0)
 
+#define hehe_que_enque(que, item)                               \
+    do {                                                        \
+        if ((que)->count < (que)->capacity) {                   \
+           (que)->items[(que)->tail] = (item);                  \
+           (que)->tail = ((que)->tail + 1) % (que)->capacity;   \
+           (que)->count++;                                      \
+        }                                                       \
+    } while (0)                     
 
-#ifdef HEHE_DA_IMPLEMENTATION
-#endif /* HEHE_DA_IMPLEMENTATION */
+#define hehe_que_deque(que, item)                                   \
+    do {                                                            \
+        if ((que)->count > 0) {                                     \
+            (item) = (que)->items[(que)->head];                     \
+            (que)->head = ((que)->head + 1) % (que)->capacity;      \
+            (que)->count--;                                         \
+        }                                                           \
+    } while (0)
+
+#define hehe_que_free(que)                      \
+    do {                                        \
+        if ((que)) {                            \
+            HEHE_DA_FREE((que)->items);         \
+            (que)->items = NULL;                \
+            (que)->head = 0;                    \
+            (que)->tail = 0;                    \
+            (que)->count = 0;                   \
+            (que)->capacity = 0;                \
+        }                                       \
+    } while (0)
 
 #endif /* HEHE_DA_H_ */

@@ -3,17 +3,19 @@
 
 #include "hehe.h"
 
-//Stack has a dynamic array inside
-//push() → add to end of array
-//pop() → remove from end of array
-//peek() → look at last element
-//All the growing/shrinking is handled by your existing array code
-//
 typedef struct {
     int*    items;
     size_t  count;
     size_t  capacity;
 } HeheDynamicArray;
+
+typedef struct {
+    int* items;
+    size_t head;     
+    size_t tail;
+    size_t count;
+    size_t capacity;
+} HeheQueue;
 
 void da_print_info(HeheDynamicArray* da)
 {
@@ -21,29 +23,40 @@ void da_print_info(HeheDynamicArray* da)
     printf("[ITEM COUNT: %zu]\n", da->count);
     printf("[DA CAPACITY: %zu]\n", da->capacity);
 }
-//    do {                                                            \
-        if ((hda)->count <= 0) {                                    \
-           pop_out = NULL;                                          \
-        } else {                                                    \
-           *pop_out = ((hda)->items[(hda)->count-1]);                 \
-           (hda)->count--;                                           \
-        }                                                            \
 
-typedef struct {
-    int* items;
-    size_t head;     // index to dequeue from
-    size_t tail;     // index to enqueue to
-    size_t count;    // how many items
-    size_t capacity;
-} HeheQueue;
-
+void que_print_info(HeheQueue* qu)
+{
+    printf("[ITEMS PTR: %p]\n", qu->items);
+    printf("[HEAD: %zu]\n", qu->head);
+    printf("[TAIL: %zu]\n", qu->tail);
+    printf("[COUNT: %zu]\n", qu->count);
+    printf("[CAP: %zu]\n", qu->capacity);
+}
 
 int main(void)
 {   
-    HeheDynamicArray da = {0}; 
-   
+    HeheQueue que = {0};
+    hehe_que_mem_init(&que, 10);
+
+    int x = 10;
+    int y = 20;
+    int z = 30;
+    int denque = 0;
+    hehe_que_enque(&que, x);
+    hehe_que_enque(&que, y); 
+    hehe_que_enque(&que, z); 
+    
+    for (int i = 0; i < 3; i++) {
+        hehe_que_deque(&que, denque);
+        printf("%d\n", denque);
+    }
+
+    que_print_info(&que);
     
 
+#if 0
+    HeheDynamicArray da = {0}; 
+   
     hehe_da_append(&da, 10);
     da_print_info(&da);
 
@@ -52,7 +65,6 @@ int main(void)
     printf("%d", x);
 
     da_print_info(&da);
-#if 0
     int amount = 100;
     
     hehe_da_reserve(&da, 69);
