@@ -13,8 +13,8 @@
  */
 
 // HEHE_LOG baked in kinda.
-#include <bits/time.h>
 #include <stdio.h>
+
 #define HEHE_LOG_INFO(...)  fprintf(stdout, "[INFO]: " __VA_ARGS__)
 #define HEHE_LOG_ERROR(...) fprintf(stderr, "[ERROR]: " __VA_ARGS__)
 #define HEHE_LOG_WARN(...)  fprintf(stderr, "[WARNING]: " __VA_ARGS__)
@@ -32,26 +32,21 @@ static void hehe_log_test(void)
 #include <time.h>
 #include <stdint.h>
 
+// eg #define HEHEDEF static inline
 #ifndef HEHEDEF
 #define HEHEDEF
 #endif
 
 HEHEDEF void hehe_timestamp_iso(char* buffer, size_t buffer_size);
 HEHEDEF void hehe_timestamp_brief(char* buffer, size_t size);
-HEHEDEF void hehe_time_get_ms(void);
-HEHEDEF void hehe_time_get_ns(void);
+HEHEDEF uint64_t hehe_time_get_sec(void);
+HEHEDEF uint64_t hehe_time_get_ms(void);
+HEHEDEF uint64_t hehe_time_get_ns(void);
 
-#if 1 
+#if 0 
 #define HEHE_TIME_IMPLEMENTATION
 #endif
 #ifdef HEHE_TIME_IMPLEMENTATION
-// int main() {
-//     time_t now = time(NULL);
-//     struct tm* t = localtime(&now);
-//     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", t);
-//     printf("[INFO] Current time: %s\n", buf);
-//     return 0;
-// }
 
 HEHEDEF void hehe_timestamp_iso(char* buffer, size_t size)
 {
@@ -67,10 +62,18 @@ HEHEDEF void hehe_timestamp_brief(char* buffer, size_t size)
     strftime(buffer, size, "%Y%m%d_%H%M%S", t);
 }
 
+HEHEDEF uint64_t hehe_time_get_sec(void)
+{
+    struct timespec tp;
+    clock_gettime(CLOCK_MONOTONIC, &tp);
+    return (uint64_t)tp.tv_sec + tp.tv_nsec / 1000000000ULL;   
+}
+
 HEHEDEF uint64_t hehe_time_get_ms(void)
 {
     struct timespec tp;
     clock_gettime(CLOCK_MONOTONIC, &tp);
+    return (uint64_t)tp.tv_sec * 1000ULL + tp.tv_nsec / 1000000ULL;
 }
 
 HEHEDEF uint64_t hehe_time_get_ns(void) 

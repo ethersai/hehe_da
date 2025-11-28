@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <inttypes.h>
 
 #include "hehe.h"
 #define HEHE_TIME_IMPLEMENTATION
@@ -65,6 +66,10 @@ int main(int argc, char* argv[])
     printf("%s\n", buffer);
     hehe_timestamp_brief(buffer, sizeof(buffer));
     printf("%s\n", buffer);
+
+    printf("%" PRIu64 "\n", hehe_time_get_sec());
+    printf("%" PRIu64 "\n", hehe_time_get_ms());
+    printf("%" PRIu64 "\n", hehe_time_get_ns());
 
 #if 0 
     HeheQueue que = {0};

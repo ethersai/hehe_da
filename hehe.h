@@ -67,8 +67,8 @@
 // Thank you for using my library! (feel free to contribute!)
 ////////////////////////////////////
 
-#ifndef HEHE_H_
-#define HEHE_H_
+#ifndef HEHe_H_
+#define HEHe_H_
 
 #include <stdlib.h>
 #include <string.h>
@@ -261,7 +261,7 @@
     } while (0) 
 #endif/*defined(HEHE_GIVE_ALL) || defined(HEHE_GIVE_BITS)*/
 
-#endif /* HEHE_H_ */
+#endif /* HEHe_H_ */
 /****************************************/
 /* Written by ethersai - Public domain. */
 /****************************************/
