@@ -1,4 +1,10 @@
 /*
+ * This software is dual-licensed to the public domain and under the following
+ * license: you are granted a perpetual, irrevocable license to copy, modify,
+ * publish, and distribute this file as you see fit.
+ */
+
+/*
  * HEHE_DA - Dynamic Array Implementation
  * 
  * Usage:
@@ -45,9 +51,21 @@
  * HEHE_GIVE_QUEUE - Include queue
  */
 
-// TODO 
-// SOME POTENTIAL OVERFLOW CHECKS FOR CAPACITY IN DA.
-// ADD STRING BUILDER!
+//////////////
+// TODO: 
+// - Size_t overflow checks in DA.
+// - Add string builder
+// - Hashmap
+//////////////
+
+////////////////////////////////////
+// NOTE:
+// This library is made primarily for personal use, so there may be bugs,
+// and some parts may be unfinished or unpolished. As I keep using it,
+// i expect to discover what works well and what needs improvement.
+// 
+// Thank you for using my library!
+////////////////////////////////////
 
 #ifndef HEHE_H_
 #define HEHE_H_
@@ -87,7 +105,7 @@
 #define HEHE_DA_MALLOC malloc
 #endif /* HEHE_DA_MALLOC */
 
-#define hehe_perma_assert(exp) do { if(!(exp)) { fprintf(stderr, "[HEHE_DS] Assertion failed: %s, file %s, line %d\n", #exp, __FILE__, __LINE__); abort() ;} ;} while (0)
+#define hehe_perma_assert(exp) do { if(!(exp)) { fprintf(stderr, "[HEHE_H] Assertion failed: %s, file %s, line %d\n", #exp, __FILE__, __LINE__); abort() ;} ;} while (0)
 
 // [DYNAMIC ARRAY]
 #if defined(HEHE_GIVE_ALL) || defined(HEHE_GIVE_DA)
@@ -243,3 +261,4 @@
 #endif/*defined(HEHE_GIVE_ALL) || defined(HEHE_GIVE_BITS)*/
 
 #endif /* HEHE_H_ */
+/* Written by ethersai - Public domain. */
