@@ -64,7 +64,7 @@
 // and some parts may be unfinished or unpolished. As I keep using it,
 // i expect to discover what works well and what needs improvement.
 // 
-// Thank you for using my library!
+// Thank you for using my library! (feel free to contribute!)
 ////////////////////////////////////
 
 #ifndef HEHE_H_
