@@ -133,6 +133,7 @@
 
 #define hehe_da_pop(hda, pop_out)                                   \
     do {                                                            \
+        HEHE_DA_ASSERT(pop_out != NULL);                            \
         if ((hda)->count > 0) {                                     \
            *pop_out = ((hda)->items[--(hda)->count]);               \
         }                                                           \
