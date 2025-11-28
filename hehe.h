@@ -45,7 +45,7 @@
 
 /*
  * Define before including to enable features:
- * HEHE_GIVE_ALL   - Include everything
+ * HEHE_GIVE_ALL   - Include everything (defined by default if you dont define anything.)
  * HEHE_GIVE_DA    - Include dynamic array
  * HEHE_GIVE_BITS  - Include bit manipulation
  * HEHE_GIVE_QUEUE - Include queue
