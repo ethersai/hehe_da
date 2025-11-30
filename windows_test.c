@@ -9,12 +9,11 @@ int main(void)
     hehe_timestamp_brief(buffer, sizeof(buffer));
     printf("%s\n", buffer);
    
-    
     uint64_t x = hehe_time_get_ms();
     uint64_t y = hehe_time_get_ns();
     uint64_t z = hehe_time_get_sec();
 
-    HEHE_LOG_INFO("%lu, %lu, %lu", x, y, z);
+    HEHE_LOG_INFO("MS:%lu\n, NS:%lu\n, SEC:%lu\n", x, y, z);
 
     // siema windows!
 
