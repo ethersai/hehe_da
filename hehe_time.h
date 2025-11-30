@@ -68,7 +68,7 @@ HEHEDEF void hehe_timestamp_brief(char* buffer, size_t size)
     strftime(buffer, size, "%Y%m%d_%H%M%S", t);
 }
 
-#if defined(_WIN32) && defined(_MSC_VER)
+#if defined(_WIN32)
 static inline long long internal_hehe_win_get_freq(void)
 {
     static long long freq = 0;
@@ -84,7 +84,7 @@ static inline long long internal_hehe_win_get_freq(void)
 
 HEHEDEF uint64_t hehe_time_get_sec(void)
 {
-#if defined(_WIN32) && defined(_MSC_VER)
+#if defined(_WIN32)
     long long freq = internal_hehe_win_get_freq(); 
     LARGE_INTEGER ticks;
     QueryPerformanceCounter(&ticks);        // Get current tick count
@@ -99,7 +99,7 @@ HEHEDEF uint64_t hehe_time_get_sec(void)
 HEHEDEF uint64_t hehe_time_get_ms(void)
 {
 
-#if defined(_WIN32) && defined(_MSC_VER)
+#if defined(_WIN32)
     long long freq = internal_hehe_win_get_freq(); 
     LARGE_INTEGER ticks;
     QueryPerformanceCounter(&ticks);        // Get current tick count
@@ -113,7 +113,7 @@ HEHEDEF uint64_t hehe_time_get_ms(void)
 
 HEHEDEF uint64_t hehe_time_get_ns(void) 
 {
-#if defined(_WIN32) && defined(_MSC_VER)
+#if defined(_WIN32)
     long long freq = internal_hehe_win_get_freq(); 
     LARGE_INTEGER ticks;
     QueryPerformanceCounter(&ticks);        // Get current tick count
