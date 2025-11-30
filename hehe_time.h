@@ -7,11 +7,6 @@
 #ifndef HEHe_TIME_H_
 #define HEHe_TIME_H_
 
-/*
- * "Action is the proof of earnestness. [https://www.youtube.com/watch?v=Kopr6Q3oGHw] [Fri Nov 28 21:39:57]
- *  Do what you are told diligently and faithfully, and obstacles will resolve themselves."
- */
-
 // HEHE_LOG baked in kinda.
 #include <stdio.h>
 
@@ -43,7 +38,7 @@ HEHEDEF uint64_t hehe_time_get_sec(void);
 HEHEDEF uint64_t hehe_time_get_ms(void);
 HEHEDEF uint64_t hehe_time_get_ns(void);
 
-#if 0 
+#if 1
 #define HEHE_TIME_IMPLEMENTATION
 #endif
 #ifdef HEHE_TIME_IMPLEMENTATION
@@ -86,6 +81,11 @@ HEHEDEF uint64_t hehe_time_get_ns(void)
 #endif /*HEHE_TIME_IMPLEMENTATION*/
 
 #endif /*HEHe_TIME_H_*/
+/*
+ * "Action is the proof of earnestness.
+ *  Do what you are told diligently and faithfully, and obstacles will resolve themselves."
+ *  [https://www.youtube.com/watch?v=Kopr6Q3oGHw] [Fri Nov 28 21:39:57]
+ */
 /****************************************/
 /* Written by ethersai - Public domain. */
 /****************************************/
