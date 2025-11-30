@@ -14,7 +14,7 @@ int main(void)
     uint64_t y = hehe_time_get_ns();
     uint64_t z = hehe_time_get_sec();
 
-    HEHE_LOG_INFO("%llu, %llu, %llu", x, y, z);
+    HEHE_LOG_INFO("%lu, %lu, %lu", x, y, z);
 
     // siema windows!
 
