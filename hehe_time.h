@@ -28,17 +28,6 @@
 #define HEHE_LOG_WARN(...)  fprintf(stderr, "[WARNING]: " __VA_ARGS__)
 // ADD LOG TO FILE.
 
-#if 0
-static void hehe_log_test(void) 
-{
-    const char* test = "This is a test!";
-    // homework: HEHE BUILD STRING.
-    HEHE_LOG_INFO("%s\n", test);
-    HEHE_LOG_ERROR("%s\n", test);
-    HEHE_LOG_INFO("%s\n", test);
-}
-#endif
-
 #include <time.h>
 #include <stdint.h>
 
@@ -58,8 +47,7 @@ HEHEDEF uint64_t hehe_time_get_sec(void);
 HEHEDEF uint64_t hehe_time_get_ms(void);
 HEHEDEF uint64_t hehe_time_get_ns(void);
 
-
-
+// IMPLEMENTATION PART
 #ifdef HEHE_TIME_IMPLEMENTATION
 
 HEHEDEF void hehe_timestamp_iso(char* buffer, size_t size)
@@ -117,7 +105,6 @@ HEHEDEF uint64_t hehe_time_get_ns(void)
     return (uint64_t)tp.tv_sec * 1000000000ULL + tp.tv_nsec;
 #endif
 }
-
 #endif /*HEHE_TIME_IMPLEMENTATION*/
 
 #endif /*HEHe_TIME_H_*/
